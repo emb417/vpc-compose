@@ -1,0 +1,102 @@
+services:
+  # The Nginx Reverse Proxy Service
+  nginx:
+    image: ericfaris/nginx:latest
+    restart: always
+    ports:
+      - "80:80"
+      - "8443:8443"
+    networks:
+      - vpc-network
+    volumes:
+      - /data/nginx/sites-available/default.conf:/etc/nginx/sites-enabled/default.conf
+      - /data/certbot/conf:/etc/letsencrypt
+      - /var/log/nginx:/var/log/nginx
+      - /var/log/letsencrypt:/var/log/letsencrypt
+    depends_on:
+      - vpc-next
+      - vpc-data
+      - vps-data
+
+  # The Certbot Service
+  certbot:
+    image: certbot/dns-cloudflare
+    restart: always
+    networks:
+      - vpc-network
+    volumes:
+      - /etc/cloudflare:/etc/cloudflare
+      - /data/certbot/conf:/etc/letsencrypt
+      - /data/certbot/www:/var/www/certbot
+      - /var/log/letsencrypt:/var/log/letsencrypt
+    entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'"
+
+  # The VPC Discord Bot
+  vpc-bot:
+    image: ericfaris/vpc-bot
+    container_name: vpc-bot
+    restart: unless-stopped
+    env_file:
+      - ./vpc-bot.env
+    networks:
+      - vpc-network
+    depends_on:
+      - vpc-data
+      - vps-data
+
+  # The VPC Next.js App
+  vpc-next:
+    image: ericfaris/vpc-next
+    container_name: vpc-next
+    restart: unless-stopped
+    env_file:
+      - ./vpc-next.env
+    networks:
+      - vpc-network
+    depends_on:
+      - vpc-data
+      - vps-data
+
+  # The VPC Data API Service
+  vpc-data:
+    image: ericfaris/vpc-data
+    container_name: vpc-data
+    restart: unless-stopped
+    env_file:
+      - ./vpc-data.env
+    networks:
+      - vpc-network
+
+  # The VPS Data API Service
+  vps-data:
+    image: ericfaris/vps-data
+    container_name: vps-data
+    restart: unless-stopped
+    networks:
+      - vpc-network
+
+  # The VPW Data API Service
+  vpw-data:
+    image: ericfaris/vpw-data
+    container_name: vpw-data
+    restart: unless-stopped
+    env_file:
+      - ./vpw-data.env
+    networks:
+      - vpc-network
+
+  # The VPW Discord Bot
+  vpw-bot:
+    image: ericfaris/vpw-bot
+    container_name: vpw-bot
+    restart: unless-stopped
+    env_file:
+      - ./vpw-bot.env
+    networks:
+      - vpc-network
+    depends_on:
+      - vpw-data
+
+networks:
+  vpc-network:
+      driver: bridge

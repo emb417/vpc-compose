@@ -1,0 +1,95 @@
+services:
+  # The Nginx Reverse Proxy Service
+  nginx:
+    build:
+      context: ../nginx
+    container_name: nginx
+    restart: unless-stopped
+    ports:
+      - "80:80"
+    networks:
+      - vpc-network
+    volumes:
+      # This mount tells Nginx to use your local, non-SSL configuration.
+      - ../nginx/sites-available/default-local.conf:/etc/nginx/sites-enabled/default.conf
+    # The Nginx service depends on the Next.js app and the other APIs to be running.
+    depends_on:
+      - vpc-next
+      - vpc-data
+      - vps-data
+  
+  # The VPC Discord Bot
+  vpc-bot:
+    build:
+      context: ../vpc-bot
+    container_name: vpc-bot
+    restart: unless-stopped
+    env_file:
+      - ./vpc-bot-local.env
+    networks:
+      - vpc-network
+    depends_on:
+      - vpc-data
+      - vps-data
+
+  # The VPC Next.js App
+  vpc-next:
+    build:
+      context: ../vpc-next
+    container_name: vpc-next
+    restart: unless-stopped
+    env_file:
+      - ./vpc-next-local.env
+    networks:
+      - vpc-network
+    depends_on:
+      - vpc-data
+      - vps-data
+
+  # The VPC Data API Service
+  vpc-data:
+    build:
+      context: ../vpc-data
+    container_name: vpc-data
+    restart: unless-stopped
+    env_file:
+      - ./vpc-data-local.env
+    networks:
+      - vpc-network
+
+  # The VPS Data API Service
+  vps-data:
+    build:
+      context: ../vps-data
+    container_name: vps-data
+    restart: unless-stopped
+    networks:
+      - vpc-network
+
+  # The VPW Data API Service
+  vpw-data:
+    build:
+      context: ../vpw-data
+    container_name: vpw-data
+    restart: unless-stopped
+    env_file:
+      - ./vpw-data-local.env
+    networks:
+      - vpc-network
+
+  # The VPW Discord Bot
+  vpw-bot:
+    build:
+      context: ../vpw-bot
+    container_name: vpw-bot
+    restart: unless-stopped
+    env_file:
+      - ./vpw-bot-local.env
+    networks:
+      - vpc-network
+    depends_on:
+      - vpw-data
+
+networks:
+  vpc-network:
+    driver: bridge
