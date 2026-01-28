@@ -9,7 +9,6 @@ services:
     networks:
       - vpc-network
     volumes:
-      - /data/nginx/sites-available/default.conf:/etc/nginx/sites-enabled/default.conf
       - /data/certbot/conf:/etc/letsencrypt
       - /var/log/nginx:/var/log/nginx
       - /var/log/letsencrypt:/var/log/letsencrypt
