@@ -1,7 +1,7 @@
 services:
   # The Nginx Reverse Proxy Service
   nginx:
-    image: ericfaris/nginx:latest
+    image: ericfaris/nginx:refactor
     restart: always
     ports:
       - "80:80"
@@ -33,7 +33,7 @@ services:
 
   # The VPC Discord Bot
   vpc-bot:
-    image: ericfaris/vpc-bot:latest
+    image: ericfaris/vpc-bot:refactor
     container_name: vpc-bot
     restart: unless-stopped
     env_file:
@@ -46,7 +46,7 @@ services:
 
   # The VPC Next.js App
   vpc-next:
-    image: emb417/vpc-next:latest
+    image: emb417/vpc-next:refactor
     container_name: vpc-next
     restart: unless-stopped
     env_file:
@@ -59,7 +59,7 @@ services:
 
   # The VPC Data API Service
   vpc-data:
-    image: ericfaris/vpc-data:latest
+    image: ericfaris/vpc-data:refactor
     container_name: vpc-data
     restart: unless-stopped
     env_file:
@@ -69,7 +69,7 @@ services:
 
   # The VPS Data API Service
   vps-data:
-    image: ericfaris/vps-data:latest
+    image: ericfaris/vps-data:refactor
     container_name: vps-data
     restart: unless-stopped
     networks:
@@ -77,7 +77,7 @@ services:
 
   # The VPW Data API Service
   vpw-data:
-    image: ericfaris/vpw-data:latest
+    image: ericfaris/vpw-data:refactor
     container_name: vpw-data
     restart: unless-stopped
     env_file:
@@ -87,7 +87,7 @@ services:
 
   # The VPW Discord Bot
   vpw-bot:
-    image: ericfaris/vpw-bot:latest
+    image: ericfaris/vpw-bot:refactor
     container_name: vpw-bot
     restart: unless-stopped
     env_file:
