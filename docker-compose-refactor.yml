@@ -2,6 +2,7 @@ services:
   # The Nginx Reverse Proxy Service
   nginx:
     image: emb417/vpc-nginx:refactor
+    user: root
     restart: always
     ports:
       - "80:80"
