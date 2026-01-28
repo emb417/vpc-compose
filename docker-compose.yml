@@ -1,7 +1,7 @@
 services:
   # The Nginx Reverse Proxy Service
   nginx:
-    image: ericfaris/nginx:latest
+    image: emb417/vpc-nginx:latest
     restart: always
     ports:
       - "80:80"

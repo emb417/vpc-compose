@@ -2,8 +2,8 @@ services:
   # The Nginx Reverse Proxy Service
   nginx:
     build:
-      context: ../nginx
-    container_name: nginx
+      context: ../vpc-nginx
+    container_name: vpc-nginx
     restart: unless-stopped
     ports:
       - "80:80"
