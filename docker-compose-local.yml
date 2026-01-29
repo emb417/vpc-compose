@@ -63,6 +63,10 @@ services:
       context: ../vps-data
     container_name: vps-data
     restart: unless-stopped
+    env_file:
+      - ./vps-data.env
+    volumes:
+      - vps-cache:/cache
     networks:
       - vpc-network
 
@@ -93,3 +97,6 @@ services:
 networks:
   vpc-network:
     driver: bridge
+
+volumes:
+  vps-cache:

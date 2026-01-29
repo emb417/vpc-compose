@@ -15,6 +15,7 @@ This repository contains the Docker Compose configuration files for the VPC stac
   - requires vpc-data.env
   - depends on vps-data
 - [vps-data](https://github.com/ericfaris/vps-data): VPS Data API
+  - requires vps-data.env
 - [vpw-bot](https://github.com/ericfaris/vpw-bot): VPW Discord Bot
   - requires vpw-bot.env
 - [vpw-data](https://github.com/ericfaris/vpw-data): VPW Data API
@@ -157,3 +158,9 @@ The following variables are expected in the `vpw-data.env` and `vpw-data-local.e
 | SECONDS_TO_DELETE_MESSAGE | Number of seconds to delete messages after |
 | VERSION                   | Version of the bot                         |
 | VPW_DATA_SERVICE_API_URI  | URL of the VPW Data service API            |
+
+The following variables are expected in the `vps-data.env` file:
+
+| Variable | Description                 |
+| -------- | --------------------------- |
+| VPS_URL  | URL of the VPS DB JSON file |
