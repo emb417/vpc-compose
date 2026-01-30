@@ -1,3 +1,9 @@
+x-logging: &default-logging
+  driver: json-file
+  options:
+    max-size: "10m"
+    max-file: "14"
+
 services:
   # The Nginx Reverse Proxy Service
   nginx:
@@ -17,6 +23,7 @@ services:
       - vpc-next
       - vpc-data
       - vps-data
+    logging: *default-logging
   
   # The VPC Discord Bot
   vpc-bot:
@@ -31,6 +38,7 @@ services:
     depends_on:
       - vpc-data
       - vps-data
+    logging: *default-logging
 
   # The VPC Next.js App
   vpc-next:
@@ -45,6 +53,7 @@ services:
     depends_on:
       - vpc-data
       - vps-data
+    logging: *default-logging
 
   # The VPC Data API Service
   vpc-data:
@@ -56,6 +65,7 @@ services:
       - ./vpc-data-local.env
     networks:
       - vpc-network
+    logging: *default-logging
 
   # The VPS Data API Service
   vps-data:
@@ -69,6 +79,7 @@ services:
       - vps-cache:/cache
     networks:
       - vpc-network
+    logging: *default-logging
 
   # The VPW Data API Service
   vpw-data:
@@ -80,6 +91,7 @@ services:
       - ./vpw-data-local.env
     networks:
       - vpc-network
+    logging: *default-logging
 
   # The VPW Discord Bot
   vpw-bot:
@@ -93,6 +105,7 @@ services:
       - vpc-network
     depends_on:
       - vpw-data
+    logging: *default-logging
 
 networks:
   vpc-network:
