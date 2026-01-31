@@ -1,0 +1,142 @@
+x-logging: &default-logging
+  driver: json-file
+  options:
+    max-size: "10m"
+    max-file: "14"
+
+services:
+  # The Nginx Reverse Proxy Service
+  nginx:
+    build:
+      context: ../vpc-nginx
+    container_name: vpc-nginx
+    restart: unless-stopped
+    ports:
+      - "80:80"
+    networks:
+      - vpc-network
+    volumes:
+      - ../vpc-nginx/nginx-aws.conf:/etc/nginx/nginx.conf
+    depends_on:
+      - vpc-next
+      - vpc-data
+      - vps-data
+    logging: *default-logging
+    deploy:
+      resources:
+        limits:
+          memory: 64M
+
+  
+  # The VPC Discord Bot
+  vpc-bot:
+    build:
+      context: ../vpc-bot
+    container_name: vpc-bot
+    restart: unless-stopped
+    env_file:
+      - ./vpc-bot-local.env
+    networks:
+      - vpc-network
+    depends_on:
+      - vpc-data
+      - vps-data
+    logging: *default-logging
+    deploy:
+      resources:
+        limits:
+          memory: 128M
+
+  # The VPC Next.js App
+  vpc-next:
+    build:
+      context: ../vpc-next
+    container_name: vpc-next
+    restart: unless-stopped
+    env_file:
+      - ./vpc-next-local.env
+    networks:
+      - vpc-network
+    depends_on:
+      - vpc-data
+      - vps-data
+    logging: *default-logging
+    deploy:
+      resources:
+        limits:
+          memory: 512M
+
+  # The VPC Data API Service
+  vpc-data:
+    build:
+      context: ../vpc-data
+    container_name: vpc-data
+    restart: unless-stopped
+    env_file:
+      - ./vpc-data-local.env
+    networks:
+      - vpc-network
+    logging: *default-logging
+    deploy:
+      resources:
+        limits:
+          memory: 256M
+
+  # The VPS Data API Service
+  vps-data:
+    build:
+      context: ../vps-data
+    container_name: vps-data
+    restart: unless-stopped
+    env_file:
+      - ./vps-data.env
+    volumes:
+      - vps-cache:/cache
+    networks:
+      - vpc-network
+    logging: *default-logging
+    deploy:
+      resources:
+        limits:
+          memory: 128M
+
+  # The VPW Data API Service
+  vpw-data:
+    build:
+      context: ../vpw-data
+    container_name: vpw-data
+    restart: unless-stopped
+    env_file:
+      - ./vpw-data-local.env
+    networks:
+      - vpc-network
+    logging: *default-logging
+    deploy:
+      resources:
+        limits:
+          memory: 128M
+
+  # The VPW Discord Bot
+  vpw-bot:
+    build:
+      context: ../vpw-bot
+    container_name: vpw-bot
+    restart: unless-stopped
+    env_file:
+      - ./vpw-bot-local.env
+    networks:
+      - vpc-network
+    depends_on:
+      - vpw-data
+    logging: *default-logging
+    deploy:
+      resources:
+        limits:
+          memory: 128M
+
+networks:
+  vpc-network:
+    driver: bridge
+
+volumes:
+  vps-cache:
