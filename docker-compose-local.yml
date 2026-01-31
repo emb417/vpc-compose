@@ -16,9 +16,7 @@ services:
     networks:
       - vpc-network
     volumes:
-      # This mount tells Nginx to use your local, non-SSL configuration.
-      - ../vpc-nginx/sites-available/default-local.conf:/etc/nginx/sites-enabled/default.conf
-    # The Nginx service depends on the Next.js app and the other APIs to be running.
+      - ../vpc-nginx/nginx-dev.conf:/etc/nginx/nginx.conf
     depends_on:
       - vpc-next
       - vpc-data
