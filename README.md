@@ -37,12 +37,6 @@ To build the local development environment, run the following commands from the 
 docker compose -f docker-compose-local.yml build
 ```
 
-To stop the local development environment, run the following commands from the `vpc-compose` directory:
-
-```bash
-docker compose -f docker-compose-local.yml down
-```
-
 To run the local development environment, run the following commands from the `vpc-compose` directory:
 
 ```bash
@@ -55,12 +49,6 @@ To pull built images for the production refactor environment, run the following 
 
 ```bash
 docker compose -f docker-compose-refactor.yml pull
-```
-
-To stop the production refactor environment, run the following commands from the `vpc-compose` directory:
-
-```bash
-docker compose -f docker-compose-refactor.yml down
 ```
 
 To run the production refactor environment, run the following commands from the `vpc-compose` directory:
@@ -77,12 +65,6 @@ To pull built images for the production environment, run the following commands 
 docker compose -f docker-compose.yml pull
 ```
 
-To stop the production environment, run the following commands from the `vpc-compose` directory:
-
-```bash
-docker compose -f docker-compose.yml down
-```
-
 To run the production environment, run the following commands from the `vpc-compose` directory:
 
 ```bash
@@ -91,7 +73,7 @@ docker compose -f docker-compose.yml up -d
 
 ### Notes
 
-Currently the mongo db can have a stale connection without a full down and up cycle resulting in 404s on `https://virtualpinballchat.com:8443` or `The application did not respond` replies in discord. After building or pulling images, run the relative `docker compose down` and `docker compose up` commands to resolve the stale connection.
+Certbot will need certs copied from server A to server B if migrating, otherwise use the `init-letsencrypt.sh` script to generate them.
 
 ## Environment Variables
 
