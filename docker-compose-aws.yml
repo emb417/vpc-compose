@@ -7,16 +7,15 @@ x-logging: &default-logging
 services:
   # The Nginx Reverse Proxy Service
   nginx:
-    build:
-      context: ../vpc-nginx
-    container_name: vpc-nginx
-    restart: unless-stopped
+    image: emb417/vpc-nginx:refactor
+    user: root
+    restart: always
     ports:
       - "80:80"
     networks:
       - vpc-network
     volumes:
-      - ../vpc-nginx/nginx-aws.conf:/etc/nginx/nginx.conf
+      - ./certbot/conf:/etc/letsencrypt
     depends_on:
       - vpc-next
       - vpc-data
@@ -30,10 +29,8 @@ services:
   
   # The VPC Discord Bot
   vpc-bot:
-    build:
-      context: ../vpc-bot
-    container_name: vpc-bot
-    restart: unless-stopped
+    image: ericfaris/vpc-bot:refactor
+    restart: always
     env_file:
       - ./vpc-bot-local.env
     networks:
@@ -49,9 +46,7 @@ services:
 
   # The VPC Next.js App
   vpc-next:
-    build:
-      context: ../vpc-next
-    container_name: vpc-next
+    image: emb417/vpc-next:refactor
     restart: unless-stopped
     env_file:
       - ./vpc-next-local.env
@@ -68,9 +63,7 @@ services:
 
   # The VPC Data API Service
   vpc-data:
-    build:
-      context: ../vpc-data
-    container_name: vpc-data
+    image: ericfaris/vpc-data:refactor
     restart: unless-stopped
     env_file:
       - ./vpc-data-local.env
@@ -84,9 +77,7 @@ services:
 
   # The VPS Data API Service
   vps-data:
-    build:
-      context: ../vps-data
-    container_name: vps-data
+    image: ericfaris/vps-data:refactor
     restart: unless-stopped
     env_file:
       - ./vps-data.env
@@ -102,9 +93,7 @@ services:
 
   # The VPW Data API Service
   vpw-data:
-    build:
-      context: ../vpw-data
-    container_name: vpw-data
+    image: ericfaris/vpw-data:refactor
     restart: unless-stopped
     env_file:
       - ./vpw-data-local.env
@@ -118,9 +107,7 @@ services:
 
   # The VPW Discord Bot
   vpw-bot:
-    build:
-      context: ../vpw-bot
-    container_name: vpw-bot
+    image: ericfaris/vpw-bot:refactor
     restart: unless-stopped
     env_file:
       - ./vpw-bot-local.env
