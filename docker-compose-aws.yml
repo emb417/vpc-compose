@@ -31,7 +31,7 @@ services:
   # The VPC Discord Bot
   vpc-bot:
     image: emb417/vpc-bot:refactor
-    restart: always
+    restart: unless-stopped
     env_file:
       - ./vpc-bot-local.env
     networks:
