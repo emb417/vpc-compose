@@ -19,7 +19,7 @@ The project uses multiple compose files tailored for different environments:
 - `docker-compose.yml`: The standard production configuration. Uses pre-built images from Docker Hub.
 - `docker-compose-local.yml`: Used for local development. Builds images from local source code and mounts volumes for development convenience.
 - `docker-compose-refactor.yml`: Used for testing new architectural changes (tagged as `:refactor`).
-- `docker-compose-aws.yml`: A specific configuration for AWS-based deployments.
+- `docker-compose-aws.yml`: A specific configuration for AWS-based test deployments.
 
 ## Common Service Configurations
 

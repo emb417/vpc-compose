@@ -9,14 +9,14 @@ services:
   nginx:
     build:
       context: ../vpc-nginx
-    container_name: vpc-nginx
     restart: unless-stopped
     ports:
       - "80:80"
+      - "443:443"
     networks:
       - vpc-network
     volumes:
-      - ../vpc-nginx/nginx-dev.conf:/etc/nginx/nginx.conf
+      - ./certbot/conf:/etc/letsencrypt
     depends_on:
       - vpc-next
       - vpc-data
@@ -32,10 +32,9 @@ services:
   vpc-bot:
     build:
       context: ../vpc-bot
-    container_name: vpc-bot
     restart: unless-stopped
     env_file:
-      - ./vpc-bot-local.env
+      - ./vpc-bot-test.env
     networks:
       - vpc-network
     depends_on:
@@ -51,10 +50,9 @@ services:
   vpc-next:
     build:
       context: ../vpc-next
-    container_name: vpc-next
     restart: unless-stopped
     env_file:
-      - ./vpc-next-local.env
+      - ./vpc-next-test.env
     networks:
       - vpc-network
     depends_on:
@@ -70,10 +68,9 @@ services:
   vpc-data:
     build:
       context: ../vpc-data
-    container_name: vpc-data
     restart: unless-stopped
     env_file:
-      - ./vpc-data-local.env
+      - ./vpc-data-test.env
     networks:
       - vpc-network
     logging: *default-logging
@@ -86,7 +83,6 @@ services:
   vps-data:
     build:
       context: ../vps-data
-    container_name: vps-data
     restart: unless-stopped
     env_file:
       - ./vps-data.env
@@ -104,10 +100,9 @@ services:
   vpw-data:
     build:
       context: ../vpw-data
-    container_name: vpw-data
     restart: unless-stopped
     env_file:
-      - ./vpw-data-local.env
+      - ./vpw-data-test.env
     networks:
       - vpc-network
     logging: *default-logging
@@ -120,10 +115,9 @@ services:
   vpw-bot:
     build:
       context: ../vpw-bot
-    container_name: vpw-bot
     restart: unless-stopped
     env_file:
-      - ./vpw-bot-local.env
+      - ./vpw-bot-test.env
     networks:
       - vpc-network
     depends_on:

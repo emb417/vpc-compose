@@ -33,7 +33,7 @@ services:
     image: emb417/vpc-bot:refactor
     restart: unless-stopped
     env_file:
-      - ./vpc-bot-local.env
+      - ./vpc-bot-test.env
     networks:
       - vpc-network
     depends_on:
@@ -50,7 +50,7 @@ services:
     image: emb417/vpc-next:refactor
     restart: unless-stopped
     env_file:
-      - ./vpc-next-local.env
+      - ./vpc-next-test.env
     networks:
       - vpc-network
     depends_on:
@@ -67,7 +67,7 @@ services:
     image: emb417/vpc-data:refactor
     restart: unless-stopped
     env_file:
-      - ./vpc-data-local.env
+      - ./vpc-data-test.env
     networks:
       - vpc-network
     logging: *default-logging
@@ -97,7 +97,7 @@ services:
     image: emb417/vpw-data:refactor
     restart: unless-stopped
     env_file:
-      - ./vpw-data-local.env
+      - ./vpw-data-test.env
     networks:
       - vpc-network
     logging: *default-logging
@@ -111,7 +111,7 @@ services:
     image: emb417/vpw-bot:refactor
     restart: unless-stopped
     env_file:
-      - ./vpw-bot-local.env
+      - ./vpw-bot-test.env
     networks:
       - vpc-network
     depends_on:
