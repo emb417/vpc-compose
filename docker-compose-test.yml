@@ -7,7 +7,7 @@ x-logging: &default-logging
 services:
   # The Nginx Reverse Proxy Service
   nginx:
-    image: emb417/vpc-nginx:latest
+    image: emb417/vpc-nginx:refactor
     user: root
     restart: always
     ports:
@@ -30,10 +30,10 @@ services:
   
   # The VPC Discord Bot
   vpc-bot:
-    image: emb417/vpc-bot:latest
+    image: emb417/vpc-bot:refactor
     restart: unless-stopped
     env_file:
-      - ./vpc-bot.env
+      - ./vpc-bot-test.env
     networks:
       - vpc-network
     depends_on:
@@ -47,10 +47,10 @@ services:
 
   # The VPC Next.js App
   vpc-next:
-    image: emb417/vpc-next:latest
+    image: emb417/vpc-next:refactor
     restart: unless-stopped
     env_file:
-      - ./vpc-next-aws.env
+      - ./vpc-next-test.env
     networks:
       - vpc-network
     depends_on:
@@ -64,10 +64,10 @@ services:
 
   # The VPC Data API Service
   vpc-data:
-    image: emb417/vpc-data:latest
+    image: emb417/vpc-data:refactor
     restart: unless-stopped
     env_file:
-      - ./vpc-data.env
+      - ./vpc-data-test.env
     networks:
       - vpc-network
     logging: *default-logging
@@ -78,7 +78,7 @@ services:
 
   # The VPS Data API Service
   vps-data:
-    image: emb417/vps-data:latest
+    image: emb417/vps-data:refactor
     restart: unless-stopped
     env_file:
       - ./vps-data.env
@@ -94,10 +94,10 @@ services:
 
   # The VPW Data API Service
   vpw-data:
-    image: emb417/vpw-data:latest
+    image: emb417/vpw-data:refactor
     restart: unless-stopped
     env_file:
-      - ./vpw-data.env
+      - ./vpw-data-test.env
     networks:
       - vpc-network
     logging: *default-logging
@@ -108,10 +108,10 @@ services:
 
   # The VPW Discord Bot
   vpw-bot:
-    image: emb417/vpw-bot:latest
+    image: emb417/vpw-bot:refactor
     restart: unless-stopped
     env_file:
-      - ./vpw-bot.env
+      - ./vpw-bot-test.env
     networks:
       - vpc-network
     depends_on:
