@@ -9,16 +9,16 @@ This repository contains the Docker Compose configuration files for the VPC stac
 - [vpc-next](https://github.com/emb417/vpc-next): VPC Next.js App
   - requires vpc-next.env
   - depends on vpc-data, vps-data
-- [vpc-bot](https://github.com/ericfaris/vpc-bot): VPC Discord Bot
+- [vpc-bot](https://github.com/emb417/vpc-bot): VPC Discord Bot
   - requires vpc-bot.env
-- [vpc-data](https://github.com/ericfaris/vpc-data): VPC Data API
+- [vpc-data](https://github.com/emb417/vpc-data): VPC Data API
   - requires vpc-data.env
   - depends on vps-data
-- [vps-data](https://github.com/ericfaris/vps-data): VPS Data API
+- [vps-data](https://github.com/emb417/vps-data): VPS Data API
   - requires vps-data.env
-- [vpw-bot](https://github.com/ericfaris/vpw-bot): VPW Discord Bot
+- [vpw-bot](https://github.com/emb417/vpw-bot): VPW Discord Bot
   - requires vpw-bot.env
-- [vpw-data](https://github.com/ericfaris/vpw-data): VPW Data API
+- [vpw-data](https://github.com/emb417/vpw-data): VPW Data API
   - requires vpw-data.env
 
 The `docker-compose.yml` file is the primary configuration file for the production VPC stack.

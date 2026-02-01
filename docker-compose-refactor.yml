@@ -45,7 +45,7 @@ services:
 
   # The VPC Discord Bot
   vpc-bot:
-    image: ericfaris/vpc-bot:refactor
+    image: emb417/vpc-bot:refactor
     restart: unless-stopped
     env_file:
       - ./vpc-bot.env
@@ -79,7 +79,7 @@ services:
 
   # The VPC Data API Service
   vpc-data:
-    image: ericfaris/vpc-data:refactor
+    image: emb417/vpc-data:refactor
     restart: unless-stopped
     env_file:
       - ./vpc-data.env
@@ -93,7 +93,7 @@ services:
 
   # The VPS Data API Service
   vps-data:
-    image: ericfaris/vps-data:refactor
+    image: emb417/vps-data:refactor
     restart: unless-stopped
     env_file:
       - ./vps-data.env
@@ -109,7 +109,7 @@ services:
 
   # The VPW Data API Service
   vpw-data:
-    image: ericfaris/vpw-data:refactor
+    image: emb417/vpw-data:refactor
     restart: unless-stopped
     env_file:
       - ./vpw-data.env
@@ -123,7 +123,7 @@ services:
 
   # The VPW Discord Bot
   vpw-bot:
-    image: ericfaris/vpw-bot:refactor
+    image: emb417/vpw-bot:refactor
     restart: unless-stopped
     env_file:
       - ./vpw-bot.env
