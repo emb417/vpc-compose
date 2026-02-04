@@ -3,19 +3,16 @@
 This repository contains the Docker Compose configuration files for the VPC stack.
 
 - [vpc-nginx](https://github.com/emb417/vpc-nginx): Nginx Reverse Proxy
-  - depends on vpc-next, vpc-data, vps-data
+  - depends on vpc-next, vpc-data
   - requires certs in `/data/certbot/conf`
 - [certbot](https://github.com/certbot/certbot): Certbot for SSL certificates
 - [vpc-next](https://github.com/emb417/vpc-next): VPC Next.js App
   - requires vpc-next.env
-  - depends on vpc-data, vps-data
+  - depends on vpc-data
 - [vpc-bot](https://github.com/emb417/vpc-bot): VPC Discord Bot
   - requires vpc-bot.env
 - [vpc-data](https://github.com/emb417/vpc-data): VPC Data API
   - requires vpc-data.env
-  - depends on vps-data
-- [vps-data](https://github.com/emb417/vps-data): VPS Data API
-  - requires vps-data.env
 - [vpw-bot](https://github.com/emb417/vpw-bot): VPW Discord Bot
   - requires vpw-bot.env
 - [vpw-data](https://github.com/emb417/vpw-data): VPW Data API
@@ -79,12 +76,13 @@ Certbot will need certs copied from server A to server B if migrating, otherwise
 
 The following variables are expected in the `vpc-data.env`, `vpc-data-local.env`, `vpw-data.env`, and `vpw-data-local.env` files:
 
-| Variable    | Description       |
-| ----------- | ----------------- |
-| DB_NAME     | Database name     |
-| DB_USER     | Database username |
-| DB_PASSWORD | Database password |
-| PORT        | Port number       |
+| Variable    | Description                 |
+| ----------- | --------------------------- |
+| DB_NAME     | Database name               |
+| DB_USER     | Database username           |
+| DB_PASSWORD | Database password           |
+| PORT        | Port number                 |
+| VPS_URL     | URL of the VPS DB JSON file |
 
 The following variables are expected in the `vpc-next.env` and `vpc-next-local.env` files:
 
@@ -140,9 +138,3 @@ The following variables are expected in the `vpw-data.env` and `vpw-data-local.e
 | SECONDS_TO_DELETE_MESSAGE | Number of seconds to delete messages after |
 | VERSION                   | Version of the bot                         |
 | VPW_DATA_SERVICE_API_URI  | URL of the VPW Data service API            |
-
-The following variables are expected in the `vps-data.env` file:
-
-| Variable | Description                 |
-| -------- | --------------------------- |
-| VPS_URL  | URL of the VPS DB JSON file |

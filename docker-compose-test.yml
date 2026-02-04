@@ -37,7 +37,6 @@ services:
       - vpc-network
     depends_on:
       - vpc-data
-      - vps-data
     logging: *default-logging
     deploy:
       resources:
@@ -54,7 +53,6 @@ services:
       - vpc-network
     depends_on:
       - vpc-data
-      - vps-data
     logging: *default-logging
     deploy:
       resources:

@@ -31,7 +31,7 @@ The project uses multiple compose files tailored for different environments:
 
 The stack follows a specific dependency order:
 
-1. **APIs:** `vpc-data`, `vps-data`, `vpw-data` (no dependencies).
+1. **APIs:** `vpc-data` and `vpw-data` (no dependencies).
 2. **Frontend & Bots:** `vpc-next` and `vpc-bot` depend on the data APIs.
 3. **Gateway:** `nginx` depends on the frontend and data APIs to ensure it has backends to proxy to.
 
