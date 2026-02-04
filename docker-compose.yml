@@ -20,7 +20,6 @@ services:
     depends_on:
       - vpc-next
       - vpc-data
-      - vps-data
     logging: *default-logging
     deploy:
       resources:
@@ -53,7 +52,6 @@ services:
       - vpc-network
     depends_on:
       - vpc-data
-      - vps-data
     logging: *default-logging
     deploy:
       resources:
@@ -70,12 +68,11 @@ services:
       - vpc-network
     depends_on:
       - vpc-data
-      - vps-data
     logging: *default-logging
     deploy:
       resources:
         limits:
-          memory: 512M
+          memory: 384M
 
   # The VPC Data API Service
   vpc-data:
@@ -83,20 +80,6 @@ services:
     restart: unless-stopped
     env_file:
       - ./vpc-data.env
-    networks:
-      - vpc-network
-    logging: *default-logging
-    deploy:
-      resources:
-        limits:
-          memory: 256M
-
-  # The VPS Data API Service
-  vps-data:
-    image: emb417/vps-data:latest
-    restart: unless-stopped
-    env_file:
-      - ./vps-data.env
     volumes:
       - vps-cache:/cache
     networks:
@@ -105,7 +88,7 @@ services:
     deploy:
       resources:
         limits:
-          memory: 128M
+          memory: 192M
 
   # The VPW Data API Service
   vpw-data:
