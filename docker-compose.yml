@@ -40,7 +40,7 @@ services:
     deploy:
       resources:
         limits:
-          memory: 128M
+          memory: 64M
 
   # The VPC Discord Bot
   vpc-bot:
@@ -72,7 +72,7 @@ services:
     deploy:
       resources:
         limits:
-          memory: 384M
+          memory: 512M
 
   # The VPC Data API Service
   vpc-data:
