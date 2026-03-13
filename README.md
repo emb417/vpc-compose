@@ -96,8 +96,6 @@ The following variables are expected in the `vpc-next.env` and `vpc-next-local.e
 | VPC_API_SEASON_WEEKS      | Path to VPC API for season weeks      |
 | VPC_API_RECENT_TABLES     | Path to VPC API for recent tables     |
 | VPC_API_SCORES_PATH       | Path to VPC API for scores            |
-| VPS_API_TABLES_PATH       | Path to VPS API for tables            |
-| VPS_API_GAMES_PATH        | Path to VPS API for games             |
 
 The following variables are expected in the `vpc-bot.env` and `vpc-bot-local.env` files:
 
